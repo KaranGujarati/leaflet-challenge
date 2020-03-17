@@ -115,6 +115,17 @@ function createMap() {
 
     L.control.layers(baseLayers, overlays).addTo(mymap);
  
+    // CREATING LEGEND
+
+    function getColor(d) {
+        return d > 5 ? "DarkRed" :
+            d > 4 ? 'Red' :
+            d > 3 ? 'Orange' :
+            d > 2 ? 'Yellow' :
+            d > 1 ? 'Green' :
+            'DarkOliveGreen';
+    };
+    
     var legend = L.control({ position: 'bottomright' });
 
     legend.onAdd = function (map) {
@@ -127,7 +138,7 @@ function createMap() {
 
          for (var i = 0; i < magnitude.length; i++) {
              div.innerHTML +=
-             '<div class="color-box" style="background-color:' + Color(magnitude[i] + 1) + ';"></div> '+ 
+             '<div class="color-box" style="background:' + getColor(magnitude[i] + 1) + ';"></div> '+ 
                 magnitude[i] + (magnitude[i + 1] ? '&ndash;' + magnitude[i + 1] + '<br>' : '+');
         }
 
